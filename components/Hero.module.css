@@ -1,0 +1,183 @@
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 100svh;
+  min-height: 560px;
+  max-height: 780px;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    height: 92vh;
+    min-height: 680px;
+    max-height: 940px;
+  }
+}
+
+.heroImage {
+  object-fit: cover;
+  /* Enquadramento do vídeo/imagem de fundo. Ajuste o segundo valor se
+     precisar subir ou descer o corte: menor (ex: 15%) mostra mais do
+     topo, maior (ex: 40%) mostra mais da parte de baixo. */
+  object-position: center center;
+  filter: brightness(0.75);
+}
+
+/* Disfarça a compressão do vídeo no celular: o desfoque esconde o
+   aspecto "quadriculado"/pixelado, e um pouco mais de contraste/
+   saturação compensa a suavização. Ajuste o blur (2px) pra mais ou
+   menos disfarce, e o brightness pra mais ou menos escuro. */
+@media (max-width: 767px) {
+  .heroImage {
+    filter: blur(2px) saturate(1.1) contrast(1.05) brightness(0.75);
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  /* Duas camadas: uma camada preta uniforme por cima de tudo (escurece
+     o vídeo inteiro, de ponta a ponta) + o gradiente marrom de sempre,
+     mais forte embaixo pra dar contraste com o texto. Pra escurecer
+     mais/menos, mude o 0.5 da primeira linha (0 = sem camada preta,
+     1 = totalmente preto). */
+  background:
+    rgba(0, 0, 0, 0.5),
+    linear-gradient(
+      to top,
+      rgba(61, 43, 32, 0.97) 0%,
+      rgba(61, 43, 32, 0.9) 28%,
+      rgba(61, 43, 32, 0.62) 55%,
+      rgba(61, 43, 32, 0.3) 78%,
+      rgba(61, 43, 32, 0.15) 100%
+    );
+}
+
+/* ===== CELULAR (padrão, telas pequenas) ===== */
+.content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1.5rem;
+  top: 120px; /* <- MOBILE: ajuste fino em pixels. Positivo desce, negativo sobe. Ex: top: 40px; ou top: -40px; */
+}
+
+@media (min-width: 640px) {
+  .content {
+    padding: 0 2rem;
+  }
+}
+
+/* ===== PC (telas a partir de 768px) ===== */
+@media (min-width: 768px) {
+  .content {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    justify-content: center;
+    top: 0px; /* <- DESKTOP: ajuste fino em pixels. Positivo desce, negativo sobe. Ex: top: 40px; ou top: -40px; */
+  }
+}
+
+.heading {
+  font-family: var(--font-fraunces);
+  font-style: italic;
+  color: var(--color-cream-soft);
+  max-width: 16ch;
+  font-size: 2.5rem;
+  line-height: 1.05;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .heading {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .heading {
+    max-width: 36rem;
+    font-size: 3.75rem;
+  }
+}
+
+.paragraph {
+  margin: 1rem 0 0;
+  max-width: 32ch;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(250, 246, 238, 0.85);
+}
+
+@media (min-width: 640px) {
+  .paragraph {
+    max-width: 26rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .paragraph {
+    max-width: 30rem;
+    font-size: 1rem;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.btnPrimary {
+  border-radius: 9999px;
+  background: var(--color-cream-soft);
+  color: var(--color-brown-ink);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btnPrimary:hover {
+  background: var(--color-gold);
+}
+
+.btnPrimary:focus-visible,
+.btnSecondary:focus-visible {
+  outline: 2px solid var(--color-cream-soft);
+  outline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  .btnPrimary {
+    padding: 0.75rem 1.75rem;
+  }
+}
+
+.btnSecondary {
+  border-radius: 9999px;
+  border: 1px solid rgba(250, 246, 238, 0.5);
+  color: var(--color-cream-soft);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btnSecondary:hover {
+  border-color: var(--color-cream-soft);
+  background: rgba(250, 246, 238, 0.1);
+}
+
+@media (min-width: 640px) {
+  .btnSecondary {
+    padding: 0.75rem 1.75rem;
+  }
+}
